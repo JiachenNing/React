@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
 
 
 class Menu extends Component {
-
-  // only class components can have local state
-  constructor(props) {
-    super(props);
-  }
 
     render() {
         // use this.props.dishes (passed in from App.js) instead of this.state.dishes
