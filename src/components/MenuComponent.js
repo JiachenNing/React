@@ -6,7 +6,7 @@ class Menu extends Component {
 
     render() {
         // use this.props.dishes (passed in from App.js) instead of this.state.dishes
-        const menu = this.props.alldishes.map((dish) => {
+        const menu = this.props.dishes.map((dish) => {
             return (
               // keys/id should be given to elements inside the array
               // helps React to know which items have changed in re-rendering
