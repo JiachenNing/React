@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 class DishDetail extends Component {
@@ -37,7 +38,8 @@ class DishDetail extends Component {
     }
 
     render() {
-
+      console.log("!!!")
+      console.log(this.props)
       const comments = this.props.comments.map((c) => {
             return (
               <div key={c.id} >
@@ -54,17 +56,28 @@ class DishDetail extends Component {
         });
 
         return (
-            <div className="container">
+                <div className="container">
                 <div className="row">
-                  <div className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.props.dish)}
-                  </div>
-                  <div className="col-12 col-md-5 m-1">
-                    {this.renderComments(comments)}
-                  </div>
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{this.props.dish.name}</h3>
+                        <hr />
+                    </div>                
                 </div>
-            </div>
-        );
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        {this.renderDish(this.props.dish)}
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        {this.renderComments(comments)}
+                    </div>
+                </div>
+                </div>
+            );
+
     }
 }
 
