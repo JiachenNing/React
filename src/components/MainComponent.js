@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import DishDetail from './DishdetailComponent';
-import { DISHES } from '../shared/dishes';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import Contact from './ContactComponent';
 import About from './AboutComponent';
-import { COMMENTS } from '../shared/comments';
-import { PROMOTIONS } from '../shared/promotions';
-import { LEADERS } from '../shared/leaders';
 import { connect } from 'react-redux';
 
 // map redux store state into props
@@ -25,11 +21,6 @@ const mapStateToProps = state => {
 }
 
 class Main extends Component {
-
-  constructor(props) {
-    super(props);
-    // no longer this.state
-  }
 
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId});
