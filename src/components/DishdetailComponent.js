@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody, Button,
     Modal, ModalHeader, ModalBody, 
     Form, FormGroup, Input, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { Loading } from './LoadingComponent';
 
 function renderComments(comments, addComment, dishId) {
       if (comments != null) 
@@ -169,7 +169,25 @@ class CommentForm extends Component {
   }
  
  const DishDetail = (props) => {
-    if (props.dish != null)
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.dish != null) {
         return (
               <div className="container">
                 <div className="row">
@@ -193,11 +211,13 @@ class CommentForm extends Component {
                 </div>
               </div>
             );
-    else
+    }
+    else {
         return(
             <div>
             </div>
         );
+    }
 }
 
 export default DishDetail;
