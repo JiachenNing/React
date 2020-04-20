@@ -5,8 +5,9 @@ import { Card, CardImg, CardText, CardBody, Button,
     Form, FormGroup, Input, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
-function renderComments(comments, addComment, dishId) {
+function renderComments(comments, postComment, dishId) {
       if (comments != null) 
         return(
           <div>
@@ -26,7 +27,7 @@ function renderComments(comments, addComment, dishId) {
                   );
               })
             }
-            <CommentForm dishId={dishId} addComment={addComment} />
+            <CommentForm dishId={dishId} postComment={postComment} />
           </div>
         );
       else
@@ -39,7 +40,7 @@ function renderDish(dish) {
     if (dish != null)
         return(
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                   <CardTitle>{dish.name}</CardTitle>
                   <CardText>{dish.description}</CardText>
@@ -81,7 +82,7 @@ class CommentForm extends Component {
 
   handleComments(values) {
       this.toggleModal();
-      this.props.addComment(this.props.dishId, this.rating.value, this.name.value, this.comment.value);
+      this.props.postComment(this.props.dishId, this.rating.value, this.name.value, this.comment.value);
     }
 
   handleBlur = (field) => (evt) => {
@@ -206,7 +207,7 @@ class CommentForm extends Component {
                         {renderDish(props.dish)}
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        {renderComments(props.comments, props.addComment, props.dish.id)}
+                        {renderComments(props.comments, props.postComment, props.dish.id)}
                     </div>
                 </div>
               </div>
