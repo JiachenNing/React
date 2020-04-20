@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
-// create action object
+// POST REQUEST BY COMMENT
 export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
     payload: comment
@@ -43,11 +43,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
 };
 
-
-
-
-
-// COMMENTS
+// GET REQUEST BY COMMENTS
 
 export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')
@@ -79,7 +75,7 @@ export const addComments = (comments) => ({
     payload: comments
 });
 
-// PROMOS
+// GET REQUEST BY PROMOS
 
 export const fetchPromos = () => (dispatch) => {
     
@@ -118,7 +114,7 @@ export const addPromos = (promos) => ({
     payload: promos
 });
 
-// DISHES
+// GET REQUEST BY DISHES
 
 // Redux thunk returns a function
 export const fetchDishes = () => (dispatch) => {
@@ -168,4 +164,41 @@ export const dishesFailed = (errmess) => ({
 export const addDishes = (dishes) => ({
     type: ActionTypes.ADD_DISHES,
     payload: dishes
+});
+
+
+// GET REQUEST BY LEADERS
+
+export const fetchLeaders = () => (dispatch) => {    
+    return fetch(baseUrl + 'leaders')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(leaders => dispatch(addLeaders(leaders)))
+    .catch(error => dispatch(leadersFailed(error.message)));
+};
+
+export const leadersLoading = () => ({
+    type: ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (errmess) => ({
+    type: ActionTypes.LEADERS_FAILED,
+    payload: errmess
+});
+
+export const addLeaders = (leaders) => ({
+    type: ActionTypes.ADD_LEADERS,
+    payload: leaders
 });
