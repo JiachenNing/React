@@ -75,6 +75,65 @@ export const addComments = (comments) => ({
     payload: comments
 });
 
+
+
+
+
+//////////////////////////////
+
+
+
+
+
+// POST REQUEST BY Feedback
+
+// export const addPromo = (promos) => ({
+//     type: ActionTypes.ADD_PROMO,
+//     payload: promo
+// });
+
+export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
+
+    const newFeedback = {
+        firstname: firstname,
+        lastname: lastname,
+        telnum: telnum,
+        email: email,
+        agree: agree,
+        contactType: contactType,
+        message: message,
+    };
+    newFeedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback', {
+        method: "POST",
+        body: JSON.stringify(newFeedback),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(response => dispatch(addComment(response)))
+    .catch(error =>  { console.log('Feedback', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
+};
+
+
+
+
+
 // GET REQUEST BY PROMOS
 
 export const fetchPromos = () => (dispatch) => {
