@@ -14,14 +14,12 @@ class Menu extends Component {
               // keys/id should be given to elements inside the array
               // helps React to know which items have changed in re-rendering
               <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card onClick={() => this.props.onClick(dish.id)}>
                     <Link to={`/menu/${dish.id}`} >
                         <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                         <CardImgOverlay>
                             <CardTitle>{dish.name}</CardTitle>
                         </CardImgOverlay>
                     </Link>
-                </Card>
               </div>
             );
         });
