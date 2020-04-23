@@ -11,7 +11,7 @@ function About(props) {
     const leaders = props.leaders.leaders.map((leader) => {
         return (
             <div class="media">
-                <img class="d-flex mr-3 img-thumbnail"
+                <img class="d-flex mr-3 img-thumbnail" alt="" 
                      src={baseUrl + leader.image}/>
                 <div class="media-body">
                     <h2 class="mt-0">{leader.name}</h2>
